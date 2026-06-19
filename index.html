@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invito di Compleanno 🎂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <header class="page-header">
+      <p class="header-tagline">✨ Un messaggio è arrivato per te ✨</p>
+    </header>
+
+    <!-- ── Flip Card ── -->
+    <div class="flip-card-container">
+      <div class="flip-card" id="flipCard" role="button" tabindex="0" aria-label="Apri l'invito">
+
+        <!-- Front Face -->
+        <div class="flip-card-face flip-card-front" aria-hidden="false">
+          <!--<span class="deco deco-tl">☁️</span>
+          <span class="deco deco-tr">☁️</span>
+          <span class="deco deco-bl">☁️</span>
+          <span class="deco deco-br">☁️</span>-->
+
+          <div class="front-content">
+            <img src="img/smile-dog.gif" alt="smile dog" class="cake-icon" />
+            <h1 class="front-title">Hai ricevuto<br />un invito speciale</h1>
+            <p class="front-emoji">☁️</p>
+            <div class="click-hint">
+              <span class="hint-text">Clicca qui</span>
+              <span class="hint-arrow">↕</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back Face -->
+        <div class="flip-card-face flip-card-back" aria-hidden="true">
+          <div class="back-content">
+            <p class="back-eyebrow">Sei invitato/a al</p>
+            <h1 class="back-name">
+              <!-- NOME FESTEGGIATO -->
+              Compleanno di Elena
+              <!-- /NOME FESTEGGIATO -->
+            </h1>
+            <div class="back-divider"></div>
+
+            <ul class="detail-list">
+              <li class="detail-item">
+                <span class="detail-icon">📅</span>
+                <div>
+                  <span class="detail-label">Data &amp; Ora</span>
+                  <span class="detail-value">
+                    <!-- DATA E ORA -->
+                    Martedi 7 Luglio 2026 · ore 20:30
+                    <!-- /DATA E ORA -->
+                  </span>
+                </div>
+              </li>
+              <li class="detail-item">
+                <span class="detail-icon">📍</span>
+                <div>
+                  <span class="detail-label">Luogo</span>
+                  <span class="detail-value">
+                    <!-- LUOGO -->
+                    Osteria milanese OSS BUS<br />Via Mangolfa, 1 - Milano
+                    <!-- /LUOGO -->
+                  </span>
+                </div>
+              </li>
+              <li class="detail-item">
+                <span class="detail-icon">👗</span>
+                <div>
+                  <span class="detail-label">Dress Code</span>
+                  <span class="detail-value">Informale (ma non troppo)</span>
+                </div>
+              </li>
+            </ul>
+
+            <button class="btn btn-rsvp" id="btnRsvp" type="button">
+              Rispondi
+            </button>
+          </div>
+        </div>
+
+      </div><!-- /.flip-card -->
+    </div><!-- /.flip-card-container -->
+
+    <!-- ── RSVP Section (revealed after flip) ── -->
+    <section class="rsvp-section" id="rsvpSection" aria-label="Conferma presenza">
+      <div class="rsvp-card">
+        <h2 class="rsvp-title">Ci sarai?</h2>
+        <img src="img/meme-criceto.gif" alt="criceto meme" class="cake-icon rsvp-meme" />
+
+        <form id="rsvpForm" class="rsvp-form" novalidate>
+          <div class="form-group">
+            <label for="nome" class="form-label">Nome</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              class="form-input"
+              placeholder="Il tuo nome"
+              autocomplete="given-name"
+            />
+            <span class="field-error" id="nomeError" role="alert">Inserisci il tuo nome</span>
+          </div>
+
+          <div class="form-group">
+            <label for="cognome" class="form-label">Cognome</label>
+            <input
+              type="text"
+              id="cognome"
+              name="cognome"
+              class="form-input"
+              placeholder="Il tuo cognome"
+              autocomplete="family-name"
+            />
+            <span class="field-error" id="cognomeError" role="alert">Inserisci il tuo cognome</span>
+          </div>
+
+          <div class="form-buttons">
+            <button type="button" class="btn btn-yes" id="btnYes">
+              🤙🏼&nbsp; Sì, ci sarò!
+            </button>
+            <button type="button" class="btn btn-no" id="btnNo">
+              ❌&nbsp; No, non posso.
+            </button>
+          </div>
+
+          <div class="sending-indicator" id="sendingIndicator" aria-live="polite">
+            <span class="spinner"></span> Invio in corso…
+          </div>
+        </form>
+
+        <div class="confirmation-message" id="confirmationMessage" aria-live="polite">
+          <p class="confirmation-icon" id="confirmationIcon"></p>
+          <p class="confirmation-text" id="confirmationText"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <p>Con affetto ❤️</p>
+    </footer>
+
+  </div><!-- /.page-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>
