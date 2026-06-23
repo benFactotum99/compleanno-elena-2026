@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnNo          = document.getElementById("btnNo");
   const sendingInd     = document.getElementById("sendingIndicator");
   const confirmMsg     = document.getElementById("confirmationMessage");
-  const confirmIcon    = document.getElementById("confirmationIcon");
+  const confirmGif     = document.getElementById("confirmationGif");
   const confirmText    = document.getElementById("confirmationText");
   const sicuroOverlay  = document.getElementById("sicuroOverlay");
   const btnSicuroSi    = document.getElementById("btnSicuroSi");
@@ -155,23 +155,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (accepted) {
       confirmMsg.classList.add("yes-response");
-      confirmIcon.textContent = "🎉";
-      confirmText.textContent = "Grazie! Ti aspettiamo! 🥂";
+      confirmGif.src = "img/gato-fofo.gif";
+      confirmGif.alt = "gato fofo";
+      confirmText.textContent = "Yeeeee! Ti aspetto!";
+      launchConfetti();
     } else {
       confirmMsg.classList.add("no-response");
-      confirmIcon.textContent = "😢";
-      confirmText.textContent = "Ci dispiace tanto… speriamo di rivederti presto!";
+      confirmGif.src = "img/dog-scroll.gif";
+      confirmGif.alt = "criceto triste";
+      confirmText.textContent = "Va bene...";
     }
 
     confirmMsg.classList.add("visible");
+  }
+
+  function launchConfetti() {
+    const colors = ["#7DC8E8", "#5AAED4", "#F5C842", "#FDE98A", "#ffffff"];
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 }, colors });
+    setTimeout(() => confetti({ particleCount: 60, angle: 60, spread: 55, origin: { x: 0, y: 0.65 }, colors }), 200);
+    setTimeout(() => confetti({ particleCount: 60, angle: 120, spread: 55, origin: { x: 1, y: 0.65 }, colors }), 400);
   }
 
   function showError(message) {
     // Reuse confirmationMessage area for the error state
     confirmMsg.classList.remove("yes-response", "no-response", "visible");
     confirmMsg.style.background = "#FFF5F5";
-    confirmIcon.textContent = "⚠️";
-    confirmText.textContent = message;
+    confirmGif.src = "";
+    confirmGif.alt = "";
+    confirmText.textContent = "⚠️ " + message;
     confirmText.style.color = "#C53030";
     confirmMsg.classList.add("visible");
 

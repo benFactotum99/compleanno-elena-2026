@@ -88,10 +88,9 @@
     <!-- ── RSVP Section (revealed after flip) ── -->
     <section class="rsvp-section" id="rsvpSection" aria-label="Conferma presenza">
       <div class="rsvp-card">
-        <h2 class="rsvp-title">Ci sarai?</h2>
-        <img src="img/gato-sorrindo.gif" alt="criceto meme" class="cake-icon rsvp-meme" />
-
         <form id="rsvpForm" class="rsvp-form" novalidate>
+          <h2 class="rsvp-title">Ci sarai?</h2>
+          <img src="img/gato-sorrindo.gif" alt="criceto meme" class="cake-icon rsvp-meme" />
           <div class="form-group">
             <label for="nome" class="form-label">Nome</label>
             <input
@@ -143,8 +142,8 @@
         </div>
 
         <div class="confirmation-message" id="confirmationMessage" aria-live="polite">
-          <p class="confirmation-icon" id="confirmationIcon"></p>
           <p class="confirmation-text" id="confirmationText"></p>
+          <img id="confirmationGif" class="confirmation-gif cake-icon" src="" alt="" />
         </div>
       </div>
     </section>
@@ -155,6 +154,7 @@
 
   </div><!-- /.page-wrapper -->
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
