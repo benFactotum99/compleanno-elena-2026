@@ -1,6 +1,6 @@
 // ── Deployment URL ────────────────────────────────────────────────────────────
 // Sostituisci con l'URL ottenuto dopo il deploy dello script su Google Apps Script
-const APPS_SCRIPT_URL = "YOUR_DEPLOYMENT_URL_HERE";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6QyMuyC1VWJ-uRlQnZfB2Zijb-jHK8X7LkVqB9-IQjVf51PNH3AMzAjK9AcAz_zLF/exec";
 // ─────────────────────────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmMsg     = document.getElementById("confirmationMessage");
   const confirmIcon    = document.getElementById("confirmationIcon");
   const confirmText    = document.getElementById("confirmationText");
+  const sicuroOverlay  = document.getElementById("sicuroOverlay");
+  const btnSicuroSi    = document.getElementById("btnSicuroSi");
+  const btnSicuroNo    = document.getElementById("btnSicuroNo");
 
   let isFlipped = false;
 
@@ -90,11 +93,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch(APPS_SCRIPT_URL, {
+        mode: "no-cors", // evita il preflight
+        headers: {
+          "Content-Type": "text/plain", // non "application/json"
+        },
         method:  "POST",
-        headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(payload),
       });
 
+      showConfirmation(risposta === "Sì");
+
+      /*
       const data = await response.json();
 
       if (data.result === "success") {
@@ -102,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         throw new Error("Unexpected response");
       }
+      */
     } catch {
       // Re-enable on network error so the user can retry
       sendingInd.classList.remove("visible");
@@ -111,7 +121,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   btnYes.addEventListener("click", () => handleSubmit("Sì"));
-  btnNo.addEventListener("click",  () => handleSubmit("No"));
+
+  btnNo.addEventListener("click", () => {
+    if (!validateForm()) return;
+    sicuroOverlay.classList.add("visible");
+    sicuroOverlay.setAttribute("aria-hidden", "false");
+  });
+
+  btnSicuroNo.addEventListener("click", () => {
+    sicuroOverlay.classList.remove("visible");
+    sicuroOverlay.setAttribute("aria-hidden", "true");
+  });
+
+  btnSicuroSi.addEventListener("click", () => {
+    sicuroOverlay.classList.remove("visible");
+    sicuroOverlay.setAttribute("aria-hidden", "true");
+    handleSubmit("No");
+  });
 
   // ── Helpers ─────────────────────────────────────────────────────────────────
   function setFormDisabled(disabled) {
@@ -133,8 +159,8 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmText.textContent = "Grazie! Ti aspettiamo! 🥂";
     } else {
       confirmMsg.classList.add("no-response");
-      confirmIcon.textContent = "💜";
-      confirmText.textContent = "Ci dispiace, ma capisce. A presto!";
+      confirmIcon.textContent = "😢";
+      confirmText.textContent = "Ci dispiace tanto… speriamo di rivederti presto!";
     }
 
     confirmMsg.classList.add("visible");
