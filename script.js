@@ -171,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     confirmMsg.classList.add("visible");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function launchConfetti() {
