@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmMsg     = document.getElementById("confirmationMessage");
   const confirmGif     = document.getElementById("confirmationGif");
   const confirmText    = document.getElementById("confirmationText");
+  const venueDetails   = document.getElementById("venueDetails");
   const sicuroOverlay  = document.getElementById("sicuroOverlay");
   const btnSicuroSi    = document.getElementById("btnSicuroSi");
   const btnSicuroNo    = document.getElementById("btnSicuroNo");
@@ -150,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function showConfirmation(accepted) {
     sendingInd.classList.remove("visible");
     rsvpForm.style.display = "none";
+    document.querySelector(".flip-card-container").style.display = "none";
 
     confirmMsg.classList.remove("yes-response", "no-response");
 
@@ -158,12 +160,14 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmGif.src = "img/gato-fofo.gif";
       confirmGif.alt = "gato fofo";
       confirmText.textContent = "Yeeeee! Ti aspetto!";
+      venueDetails.classList.add("visible");
       launchConfetti();
     } else {
       confirmMsg.classList.add("no-response");
       confirmGif.src = "img/dog-scroll.gif";
       confirmGif.alt = "criceto triste";
       confirmText.textContent = "Va bene...";
+      venueDetails.classList.remove("visible");
     }
 
     confirmMsg.classList.add("visible");

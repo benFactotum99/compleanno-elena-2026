@@ -603,12 +603,57 @@ body::before {
   line-height: 1.5;
 }
 
-.confirmation-message.yes-response {
-  background: linear-gradient(135deg, #E8F6FF, #D0EEFF);
+.confirmation-message.yes-response,
+.confirmation-message.no-response {
+  background: var(--white);
 }
 
-.confirmation-message.no-response {
-  background: #EAF5FF;
+/* Dettagli luogo sotto il messaggio sì */
+.venue-details {
+  display: none;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1.5px solid var(--sky-bright);
+}
+
+.venue-details.visible {
+  display: flex;
+}
+
+.venue-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  text-align: left;
+}
+
+.venue-item-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.venue-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.venue-item-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.venue-item-value {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.4;
 }
 
 /* ─────────────────────────────────────────────
