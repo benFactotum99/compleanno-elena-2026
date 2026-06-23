@@ -171,7 +171,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     confirmMsg.classList.add("visible");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.querySelector(".page-wrapper").classList.add("confirmation-open");
+    window.scrollTo(0, 0);
   }
 
   function launchConfetti() {

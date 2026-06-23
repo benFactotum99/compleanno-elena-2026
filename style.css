@@ -83,6 +83,13 @@ body::before {
   padding-bottom: 3rem;
 }
 
+.page-wrapper.confirmation-open {
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 /* ─────────────────────────────────────────────
    Header
 ───────────────────────────────────────────── */
