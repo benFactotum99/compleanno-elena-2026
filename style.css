@@ -135,6 +135,11 @@ body::before {
   transform: rotateY(180deg);
 }
 
+.flip-card.flipped .click-hint {
+  opacity: 0;
+  animation: none;
+}
+
 /* ─────────────────────────────────────────────
    Flip Card – shared face styles
 ───────────────────────────────────────────── */
