@@ -3,6 +3,65 @@
 const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6QyMuyC1VWJ-uRlQnZfB2Zijb-jHK8X7LkVqB9-IQjVf51PNH3AMzAjK9AcAz_zLF/exec";
 // ─────────────────────────────────────────────────────────────────────────────
 
+// ── Translations ─────────────────────────────────────────────────────────────
+const translations = {
+  it: {
+    'front-title':         'Hai ricevuto<br />un invito speciale',
+    'click-hint':          'Clicca qui',
+    'back-eyebrow':        'Sei invitato/a al',
+    'back-name':           'Compleanno di Elena',
+    'label-date':          'Data & Ora',
+    'value-date':          'Martedì 7 Luglio 2026 · ore 20:15',
+    'label-place':         'Luogo',
+    'btn-rsvp':            'Rispondi',
+    'rsvp-title':          'Ci sarai?',
+    'label-nome':          'Nome',
+    'placeholder-nome':    'Il tuo nome',
+    'label-cognome':       'Cognome',
+    'placeholder-cognome': 'Il tuo cognome',
+    'error-nome':          'Inserisci il tuo nome',
+    'error-cognome':       'Inserisci il tuo cognome',
+    'btn-yes':             '🤙🏼  Sì, ci sarò!',
+    'btn-no':              '❌  No, non posso.',
+    'sending':             ' Invio in corso…',
+    'sicuro-question':     'Sei sicura sicura?',
+    'btn-sicuro-si':       'Sì',
+    'btn-sicuro-no':       'Nah',
+    'footer':              'Con affetto ❤️',
+    'confirm-yes':         'Yeeeee! Ti aspetto!',
+    'confirm-no':          'Va bene...',
+  },
+  zh: {
+    'front-title':         '您收到了<br />一封特别邀请',
+    'click-hint':          '点击这里',
+    'back-eyebrow':        '您被邀请参加',
+    'back-name':           'Elena 的生日派对',
+    'label-date':          '日期和时间',
+    'value-date':          '2026年7月7日 · 20:15',
+    'label-place':         '地点',
+    'btn-rsvp':            '回复',
+    'rsvp-title':          '你会来吗？',
+    'label-nome':          '名字',
+    'placeholder-nome':    '你的名字',
+    'label-cognome':       '姓氏',
+    'placeholder-cognome': '你的姓氏',
+    'error-nome':          '请输入你的名字',
+    'error-cognome':       '请输入你的姓氏',
+    'btn-yes':             '🤙🏼  会，我会去！',
+    'btn-no':              '❌  不，我不能去。',
+    'sending':             ' 发送中…',
+    'sicuro-question':     '你真的确定吗？',
+    'btn-sicuro-si':       '是',
+    'btn-sicuro-no':       '不',
+    'footer':              '带着爱 ❤️',
+    'confirm-yes':         '太棒了！等你来！',
+    'confirm-no':          '好吧...',
+  }
+};
+
+let currentLang     = 'it';
+let currentResponse = null;
+
 document.addEventListener("DOMContentLoaded", () => {
   // Elements
   const flipCard       = document.getElementById("flipCard");
@@ -23,6 +82,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const sicuroOverlay  = document.getElementById("sicuroOverlay");
   const btnSicuroSi    = document.getElementById("btnSicuroSi");
   const btnSicuroNo    = document.getElementById("btnSicuroNo");
+  const translateBtn   = document.getElementById("translateBtn");
+
+  // ── Language toggle ──────────────────────────────────────────────────────────
+  function applyTranslations(lang) {
+    const t = translations[lang];
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[key] === undefined) return;
+      if (key === "front-title") {
+        el.innerHTML = t[key];
+      } else {
+        el.textContent = t[key];
+      }
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+      const key = el.dataset.i18nPlaceholder;
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+
+    if (currentResponse === "yes") confirmText.textContent = t["confirm-yes"];
+    else if (currentResponse === "no") confirmText.textContent = t["confirm-no"];
+
+    translateBtn.textContent = lang === "it" ? "🇨🇳 中文" : "🇮🇹 Italiano";
+    translateBtn.setAttribute("aria-label", lang === "it" ? "Traduci in cinese" : "翻译成意大利语");
+    document.documentElement.lang = lang === "it" ? "it" : "zh-Hans";
+  }
+
+  translateBtn.addEventListener("click", () => {
+    currentLang = currentLang === "it" ? "zh" : "it";
+    applyTranslations(currentLang);
+  });
 
   let isFlipped = false;
 
@@ -149,6 +241,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showConfirmation(accepted) {
+    currentResponse = accepted ? "yes" : "no";
+    const t = translations[currentLang];
+
     sendingInd.classList.remove("visible");
     rsvpForm.style.display = "none";
     document.querySelector(".flip-card-container").style.display = "none";
@@ -159,14 +254,14 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmMsg.classList.add("yes-response");
       confirmGif.src = "img/gato-fofo.gif";
       confirmGif.alt = "gato fofo";
-      confirmText.textContent = "Yeeeee! Ti aspetto!";
+      confirmText.textContent = t["confirm-yes"];
       venueDetails.classList.add("visible");
       launchConfetti();
     } else {
       confirmMsg.classList.add("no-response");
       confirmGif.src = "img/dog-scroll.gif";
       confirmGif.alt = "criceto triste";
-      confirmText.textContent = "Va bene...";
+      confirmText.textContent = t["confirm-no"];
       venueDetails.classList.remove("visible");
     }
 

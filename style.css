@@ -777,3 +777,36 @@ body::before {
     transition: opacity 0.2s ease;
   }
 }
+
+/* ─────────────────────────────────────────────
+   Translate button (fixed)
+───────────────────────────────────────────── */
+.translate-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  background: var(--white);
+  color: var(--sky-deep);
+  border: 1.5px solid var(--sky-light);
+  border-radius: var(--radius-btn);
+  padding: 0.45rem 0.9rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(90, 174, 212, 0.22);
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.translate-btn:hover {
+  background: var(--sky-pale);
+  box-shadow: 0 4px 18px rgba(90, 174, 212, 0.35);
+  transform: translateY(-1px);
+}
+
+.translate-btn:active {
+  transform: scale(0.96);
+}

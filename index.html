@@ -13,11 +13,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="page-wrapper">
+  <button class="translate-btn" id="translateBtn" type="button" aria-label="Traduci in cinese">🇨🇳 中文</button>
 
-    <!--<header class="page-header">
-      <p class="header-tagline">✨ Un messaggio è arrivato per te ✨</p>
-    </header>-->
+  <div class="page-wrapper">
 
     <!-- ── Flip Card ── -->
     <div class="flip-card-container">
@@ -25,17 +23,12 @@
 
         <!-- Front Face -->
         <div class="flip-card-face flip-card-front" aria-hidden="false">
-          <!--<span class="deco deco-tl">☁️</span>
-          <span class="deco deco-tr">☁️</span>
-          <span class="deco deco-bl">☁️</span>
-          <span class="deco deco-br">☁️</span>-->
-
           <div class="front-content">
             <img src="img/smile-dog.gif" alt="smile dog" class="cake-icon" />
-            <h1 class="front-title">Hai ricevuto<br />un invito speciale</h1>
+            <h1 class="front-title" data-i18n="front-title">Hai ricevuto<br />un invito speciale</h1>
             <p class="front-emoji">☁️</p>
             <div class="click-hint">
-              <span class="hint-text">Clicca qui</span>
+              <span class="hint-text" data-i18n="click-hint">Clicca qui</span>
             </div>
           </div>
         </div>
@@ -43,30 +36,22 @@
         <!-- Back Face -->
         <div class="flip-card-face flip-card-back" aria-hidden="true">
           <div class="back-content">
-            <p class="back-eyebrow">Sei invitato/a al</p>
-            <h1 class="back-name">
-              <!-- NOME FESTEGGIATO -->
-              Compleanno di Elena
-              <!-- /NOME FESTEGGIATO -->
-            </h1>
+            <p class="back-eyebrow" data-i18n="back-eyebrow">Sei invitato/a al</p>
+            <h1 class="back-name" data-i18n="back-name">Compleanno di Elena</h1>
             <div class="back-divider"></div>
 
             <ul class="detail-list">
               <li class="detail-item">
                 <span class="detail-icon">📅</span>
                 <div>
-                  <span class="detail-label">Data &amp; Ora</span>
-                  <span class="detail-value">
-                    <!-- DATA E ORA -->
-                    Martedì 7 Luglio 2026 · ore 20:15
-                    <!-- /DATA E ORA -->
-                  </span>
+                  <span class="detail-label" data-i18n="label-date">Data &amp; Ora</span>
+                  <span class="detail-value" data-i18n="value-date">Martedì 7 Luglio 2026 · ore 20:15</span>
                 </div>
               </li>
               <li class="detail-item">
                 <span class="detail-icon">📍</span>
                 <div>
-                  <span class="detail-label">Luogo</span>
+                  <span class="detail-label" data-i18n="label-place">Luogo</span>
                   <span class="detail-value">
                     <a href="https://maps.google.com/?q=Trattoria+dell'Arco,+Via+Luigi+Cagnola+6,+Milano" target="_blank" rel="noopener noreferrer">Trattoria dell'Arco</a><br />Via Luigi Cagnola, 6 - Milano
                   </span>
@@ -74,7 +59,7 @@
               </li>
             </ul>
 
-            <button class="btn btn-rsvp" id="btnRsvp" type="button">
+            <button class="btn btn-rsvp" id="btnRsvp" type="button" data-i18n="btn-rsvp">
               Rispondi
             </button>
           </div>
@@ -87,55 +72,57 @@
     <section class="rsvp-section" id="rsvpSection" aria-label="Conferma presenza">
       <div class="rsvp-card">
         <form id="rsvpForm" class="rsvp-form" novalidate>
-          <h2 class="rsvp-title">Ci sarai?</h2>
+          <h2 class="rsvp-title" data-i18n="rsvp-title">Ci sarai?</h2>
           <img src="img/gato-sorrindo.gif" alt="criceto meme" class="cake-icon rsvp-meme" />
           <div class="form-group">
-            <label for="nome" class="form-label">Nome</label>
+            <label for="nome" class="form-label" data-i18n="label-nome">Nome</label>
             <input
               type="text"
               id="nome"
               name="nome"
               class="form-input"
               placeholder="Il tuo nome"
+              data-i18n-placeholder="placeholder-nome"
               autocomplete="given-name"
             />
-            <span class="field-error" id="nomeError" role="alert">Inserisci il tuo nome</span>
+            <span class="field-error" id="nomeError" role="alert" data-i18n="error-nome">Inserisci il tuo nome</span>
           </div>
 
           <div class="form-group">
-            <label for="cognome" class="form-label">Cognome</label>
+            <label for="cognome" class="form-label" data-i18n="label-cognome">Cognome</label>
             <input
               type="text"
               id="cognome"
               name="cognome"
               class="form-input"
               placeholder="Il tuo cognome"
+              data-i18n-placeholder="placeholder-cognome"
               autocomplete="family-name"
             />
-            <span class="field-error" id="cognomeError" role="alert">Inserisci il tuo cognome</span>
+            <span class="field-error" id="cognomeError" role="alert" data-i18n="error-cognome">Inserisci il tuo cognome</span>
           </div>
 
           <div class="form-buttons">
-            <button type="button" class="btn btn-yes" id="btnYes">
+            <button type="button" class="btn btn-yes" id="btnYes" data-i18n="btn-yes">
               🤙🏼&nbsp; Sì, ci sarò!
             </button>
-            <button type="button" class="btn btn-no" id="btnNo">
+            <button type="button" class="btn btn-no" id="btnNo" data-i18n="btn-no">
               ❌&nbsp; No, non posso.
             </button>
           </div>
 
           <div class="sending-indicator" id="sendingIndicator" aria-live="polite">
-            <span class="spinner"></span> Invio in corso…
+            <span class="spinner"></span><span data-i18n="sending"> Invio in corso…</span>
           </div>
         </form>
 
         <!-- Overlay conferma "Sei sicuro??" -->
         <div class="sicuro-overlay" id="sicuroOverlay" aria-hidden="true">
-          <p class="sicuro-question">Sei sicura sicura?</p>
+          <p class="sicuro-question" data-i18n="sicuro-question">Sei sicura sicura?</p>
           <img src="img/meme-criceto.gif" alt="criceto meme" class="cake-icon rsvp-meme" />
           <div class="sicuro-buttons">
-            <button type="button" class="btn btn-sicuro-si" id="btnSicuroSi">Sì</button>
-            <button type="button" class="btn btn-sicuro-no" id="btnSicuroNo">Nah</button>
+            <button type="button" class="btn btn-sicuro-si" id="btnSicuroSi" data-i18n="btn-sicuro-si">Sì</button>
+            <button type="button" class="btn btn-sicuro-no" id="btnSicuroNo" data-i18n="btn-sicuro-no">Nah</button>
           </div>
         </div>
 
@@ -146,14 +133,14 @@
             <div class="venue-item">
               <span class="venue-item-icon">📅</span>
               <div class="venue-item-body">
-                <span class="venue-item-label">Data &amp; Ora</span>
-                <span class="venue-item-value">Martedì 7 Luglio 2026 · ore 20:15</span>
+                <span class="venue-item-label" data-i18n="label-date">Data &amp; Ora</span>
+                <span class="venue-item-value" data-i18n="value-date">Martedì 7 Luglio 2026 · ore 20:15</span>
               </div>
             </div>
             <div class="venue-item">
               <span class="venue-item-icon">📍</span>
               <div class="venue-item-body">
-                <span class="venue-item-label">Luogo</span>
+                <span class="venue-item-label" data-i18n="label-place">Luogo</span>
                 <span class="venue-item-value">
                   <a href="https://maps.google.com/?q=Trattoria+dell'Arco,+Via+Luigi+Cagnola+6,+Milano" target="_blank" rel="noopener noreferrer">Trattoria dell'Arco</a><br />Via Luigi Cagnola, 6 - Milano
                 </span>
@@ -165,7 +152,7 @@
     </section>
 
     <footer class="page-footer">
-      <p>Con affetto ❤️</p>
+      <p data-i18n="footer">Con affetto ❤️</p>
     </footer>
 
   </div><!-- /.page-wrapper -->
